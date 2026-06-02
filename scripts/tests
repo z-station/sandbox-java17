@@ -1,0 +1,2 @@
+#!/bin/bash
+docker exec -it sandbox-java bash -c "cd /app/src && PYTHONPATH=/app/src pytest -vv -p no:cacheprovider"

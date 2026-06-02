@@ -1,0 +1,31 @@
+services:
+
+  sandbox-java:
+    build:
+      context: ..
+      args:
+        - SANDBOX_USER_UID=999
+        - SANDBOX_DIR=/sandbox
+      dockerfile: ./docker/Dockerfile
+    container_name: sandbox-java
+    image: sandbox-java
+    volumes:
+      - ../src:/app/src
+      - import:/sandbox/import:ro
+    ports:
+      - "9012:9012"
+    networks:
+      - localhost
+    environment:
+      - SANDBOX_USER_UID=999
+      - SANDBOX_DIR=/sandbox
+    restart: on-failure
+    command: gunicorn --pythonpath '/app/src' --bind 0:9012 app.main:app --reload -w 1
+
+networks:
+  localhost:
+    external: true
+
+volumes:
+  import:
+    external: true
