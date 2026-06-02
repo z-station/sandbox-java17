@@ -1,14 +1,14 @@
 services:
 
-  sandbox-java:
+  sandbox-java17:
     build:
       context: ..
       args:
         - SANDBOX_USER_UID=999
         - SANDBOX_DIR=/sandbox
       dockerfile: ./docker/Dockerfile
-    container_name: sandbox-java
-    image: sandbox-java
+    container_name: sandbox-java17
+    image: sandbox-java17
     volumes:
       - ../src:/app/src
       - import:/sandbox/import:ro
