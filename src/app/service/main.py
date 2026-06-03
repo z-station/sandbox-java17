@@ -29,6 +29,7 @@ class JavaService:
             proc = subprocess.Popen(
                 args=[
                     'javac',
+                    *[f'-J{opt}' for opt in config.JAVA_OPTS],
                     '-encoding', 'UTF-8',
                     '-d', file.work_dir,
                     file.filepath_java,
@@ -61,7 +62,7 @@ class JavaService:
             и возвращает результат работы программы """
 
         proc = subprocess.Popen(
-            args=['java', '-cp', file.work_dir, file.class_name],
+            args=['java', *config.JAVA_OPTS, '-cp', file.work_dir, file.class_name],
             cwd=file.work_dir,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,

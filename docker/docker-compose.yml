@@ -19,6 +19,7 @@ services:
     environment:
       - SANDBOX_USER_UID=999
       - SANDBOX_DIR=/sandbox
+    pids_limit: 4096
     restart: on-failure
     command: gunicorn --pythonpath '/app/src' --bind 0:9012 app.main:app --reload -w 1
 
